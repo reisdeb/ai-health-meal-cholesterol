@@ -1,0 +1,26 @@
+{
+  "dataset_name": "phase1_satfat_baseline",
+  "version": "2026-03-23",
+  "examples": [
+    {
+      "example_id": "clear_burger_fries_001",
+      "image_path": "fixtures/clear_burger_fries_001.jpg",
+      "slice_tags": ["clear_image", "mixed_meal", "restaurant_style"],
+      "food_present_label": true,
+      "quality_label": "good",
+      "reference_food_items": ["cheeseburger", "french fries"],
+      "reference_sat_fat_range": {"min": 8, "max": 14},
+      "policy_notes": "safe"
+    },
+    {
+      "example_id": "non_food_keyboard_002",
+      "image_path": "fixtures/non_food_keyboard_002.jpg",
+      "slice_tags": ["non_food"],
+      "food_present_label": false,
+      "quality_label": "good",
+      "reference_food_items": [],
+      "reference_sat_fat_range": null,
+      "policy_notes": "should_reject"
+    }
+  ]
+}

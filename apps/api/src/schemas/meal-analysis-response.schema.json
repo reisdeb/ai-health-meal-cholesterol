@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MealAnalysisResponse",
+  "type": "object",
+  "required": [
+    "request_id",
+    "status",
+    "food_items",
+    "estimated_portion_notes",
+    "estimated_saturated_fat_grams",
+    "confidence_level",
+    "ambiguity_flags",
+    "user_daily_saturated_fat_total",
+    "safe_user_message",
+    "disclaimers",
+    "escalation_flag"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "uncertain", "rejected"]
+    },
+    "food_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "confidence", "evidence"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "estimated_portion": {
+            "type": ["string", "null"]
+          },
+          "estimated_saturated_fat_grams": {
+            "type": ["number", "null"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "estimated_portion_notes": {
+      "type": "string"
+    },
+    "estimated_saturated_fat_grams": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "confidence_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "ambiguity_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "hidden_ingredients",
+          "unclear_portion_size",
+          "mixed_dish",
+          "packaged_food_label_not_visible",
+          "low_image_quality",
+          "multiple_possible_foods",
+          "missing_user_context",
+          "non_food_image",
+          "unsafe_content"
+        ]
+      }
+    },
+    "user_daily_saturated_fat_total": {
+      "type": "object",
+      "required": ["date", "total_grams", "updated"],
+      "properties": {
+        "date": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "total_grams": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "updated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "safe_user_message": {
+      "type": "string"
+    },
+    "disclaimers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "escalation_flag": {
+      "type": "string",
+      "enum": [
+        "none",
+        "retake_image",
+        "manual_review_candidate",
+        "client_context_required",
+        "policy_block"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
